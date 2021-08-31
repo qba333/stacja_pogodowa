@@ -11,7 +11,6 @@ RM := rm -rf
 -include pcf8574/subdir.mk
 -include lcdpcf8574/subdir.mk
 -include i2chw/subdir.mk
--include DS1302/subdir.mk
 -include 1Wire/subdir.mk
 -include subdir.mk
 -include objects.mk

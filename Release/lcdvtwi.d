@@ -1,1 +1,0 @@
-lcdvtwi.o: ../lcdvtwi.c
