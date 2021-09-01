@@ -7,7 +7,7 @@
 
 ## Wykorzystane elementy
 
-- Arduino Uno - zawiera mikroprocesor ATmega328P
+- Arduino Uno - zawiera mikrokontroler ATmega328P
 - dioda LED
 - LCD HD44780 - typowy wyświetlacz 2x16
 - PCF8574T - ekspander w module jako konwerter do podłączenia LCD za pomocą magistrali i2c
