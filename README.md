@@ -1,7 +1,21 @@
 # Stacja pogodowa
 
-ATmega328P
+## Opis
+  
+  Projekt został stworzony z myślą o jego dalszym rozwijaniu i dodawaniu kolejnych możliwości. Aktualnie układ zbudowany jest na płytce stykowej.
 
-LCD HD44780 podłączony za pomocą magistrali i2c za pośrednictwem konwertera opartego na układzie PCF8574T
 
-Dwa czujniki temperatury DS18B20 podłączone interfejsem 1-Wire
+## Wykorzystane elementy
+
+- Arduino Uno - zawiera mikroprocesor ATmega328P
+- dioda LED
+- LCD HD44780 - typowy wyświetlacz 2x16
+- PCF8574T - ekspander w module jako konwerter do podłączenia LCD za pomocą magistrali i2c
+- 2x DS18B20 - czujniki temperatury korzystające z iterfejsu 1-Wire
+
+
+## Planowane modyfikacje
+
+- dodanie czujnika wilgoności
+- dodanie komunikacji bluetooth -> smartfon
+- dodanie układu RTC
