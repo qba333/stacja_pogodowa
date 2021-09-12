@@ -25,15 +25,18 @@ void display_temp(uint8_t x, uint8_t y);
 
 uint8_t czujniki_cnt;		/* ilość czujników temperatury na magistrali 1-Wire */
 volatile uint8_t s1_flag;	/* flaga tyknięcia timera co 1 sekundę */
+volatile uint8_t ms100_flag;	/* flaga tyknięcia timera co 100 ms */
 volatile uint8_t sekundy;	/* licznik sekund 0-59 */
+volatile uint8_t sto_ms;	/* licznik 100ms 0-9 */
+volatile uint8_t screen;	/* numer wyświetlanego ekranu zmienianego przyciiskiem */
 
-uint8_t subzero, cel, cel_fract_bits;
+uint8_t subzero, cel, cel_fract_bits;	/* zmienne czujników temperatury */
 
 
 int main(void)
 {
-	DDRC |= (1<<LED1_PIN);
-
+	DDRC |= (1<<LED1_PIN);	// ustawienie pinu diody led jako wyjście
+	PORTD |= (1<<PD7);		// podciągnięcie wejścia do Vcc
 
 	/* ustawienie TIMER0 dla F_CPU=16MHz */
 	TCCR0A |= (1<<WGM01);				/* tryb CTC */
@@ -41,6 +44,10 @@ int main(void)
 	OCR0A = 155;						/* dodatkowy podział przez 156 (rej. przepełnienia) */
 	TIMSK0 |= (1<<OCIE0A);				/* zezwolenie na przerwanie CompareMatch */
 	/* przerwanie wykonywane z częstotliwością ok 10ms (100 razy na sekundę) */
+
+	/* ustawienie przerwania PCINT na pinie PD7 */
+	PCICR |= (1<<PCINT2);	// zezwolenie na przewrania PCINT2 (na porcie D)
+	PCMSK2 |= (1<<PCINT23);	// PCINT23 = PD7
 
 
     lcd_init(LCD_DISP_ON);	// inicjalizacja LCD
@@ -61,72 +68,74 @@ int main(void)
 	_delay_ms(750);
 
 
-	/* dokonujemy odczytu temperatury z pierwszego czujnika o ile został wykryty */
-	/* wyświetlamy temperaturę gdy czujnik wykryty */
-	if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[0], &subzero, &cel, &cel_fract_bits) ) display_temp(3,0);
-	else {
-		lcd_gotoxy(3,0);
-		lcd_puts(" error ");	/* wyświetlamy informację o błędzie jeśli np brak czujnika lub błąd odczytu */
-	}
-
-	/* dokonujemy odczytu temperatury z pierwszego czujnika o ile został wykryty */
-	if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[1], &subzero, &cel, &cel_fract_bits) ) display_temp(3,1);
-	else {
-		lcd_gotoxy(3,1);
-		lcd_puts(" error ");
-	}
-
 	sei();	/* włączamy globalne przerwania */
-
-
-
-	lcd_gotoxy(0,0);
-	lcd_puts_p(PSTR("T1:")); /* wyświetl napis na LCD */
-	lcd_gotoxy(0,1);
-	lcd_puts_p(PSTR("T2:"));
-
 
     while(1)
         {
+    		lcd_gotoxy(0,0);
+    		lcd_puti(screen+1);		// wyświetlanie numeru ekranu
+
+    		if(ms100_flag) {
+
+
+				if( ( 0 == (sto_ms%2) ) && ( screen == 0 ) ) {
+					if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[0], &subzero, &cel, &cel_fract_bits) ) {
+						lcd_gotoxy(1,0);
+						lcd_puts_p(PSTR("  Temperatura   ")); /* wyświetl napis na LCD */
+						lcd_gotoxy(0,1);
+						lcd_puts_p(PSTR(" in:"));
+						display_temp(4,1);
+					}
+					else {
+						lcd_gotoxy(4,1);
+						lcd_puts(" error ");
+					}
+				}
+
+				if( ( 0 == (sto_ms%2) ) && ( screen == 1 ) ) {
+					if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[1], &subzero, &cel, &cel_fract_bits) ) {
+						lcd_gotoxy(1,0);
+						lcd_puts_p(PSTR("  Temperatura   ")); /* wyświetl napis na LCD */
+						lcd_gotoxy(0,1);
+						lcd_puts_p(PSTR("out:"));
+						display_temp(4,1);
+					}
+					else {
+						lcd_gotoxy(4,1);
+						lcd_puts(" error ");
+					}
+				}
+
+				if( ( 0 == (sto_ms%2) ) && ( screen == 2 ) ) {
+					lcd_gotoxy(1,0);
+					lcd_puts_p(PSTR("  Wilgotnosc  ")); /* wyświetl napis na LCD */
+					lcd_gotoxy(0,1);
+					lcd_puts_p(PSTR("                "));
+
+				}
+
+
+				/* co sekundę mrygnięcie diodą */
+				if( 0 == (sto_ms%10) ) {
+					PORTC |= (1<<LED1_PIN);
+				}
+				if( 1 == (sto_ms%10) ) {
+					PORTC &= !(1<<LED1_PIN);
+				}
+
+				/* zerujemy flagę aby tylko jeden raz w ciągu 100ms wykonać operacje */
+				ms100_flag=0;
+
+    		}
 
 			if(s1_flag) {	/* sprawdzanie flagi tyknięć timera programowego co 1 sekundę */
 
-				/* co trzy sekundy gdy reszta z dzielenia modulo 3 == 0 sprawdzaj ilość dostępnych czujników */
-				if( 0 == (sekundy%3) ) {
 
-					uint8_t *cl=(uint8_t*)gSensorIDs;	// pobieramy wskaźnik do tablicy adresów czujników
-					for( uint8_t i=0; i<MAXSENSORS*OW_ROMCODE_SIZE; i++) *cl++ = 0; // kasujemy całą tablicę
-					czujniki_cnt = search_sensors();	// ponownie wykrywamy ile jest czujników i zapełniamy tablicę
-					lcd_gotoxy(15,0);
-					lcd_puti( czujniki_cnt );	// wyświetlamy ilość czujników na magistrali
-				}
-
-				/* co trzy sekundy gdy reszta z dzielenia modulo 3 == 1 wysyłaj rozkaz pomiaru do czujników */
-				if( 1 == (sekundy%3) ) {
+				/* co dwie sekundy gdy reszta z dzielenia modulo 2 == 0 wysyłaj rozkaz pomiaru do czujników */
+				if( 0 == (sekundy%2) ) {
 					DS18X20_start_meas( DS18X20_POWER_EXTERN, NULL );
 				}
 
-				/* co trzy sekundy gdy reszta z dzielenia modulo 3 == 2 czyli jedną sekundę po rozkazie konwersji
-				 *  dokonuj odczytu i wyświetlania temperatur z 2 czujników jeśli są podłączone, jeśli nie
-				 *  to pokaż komunikat o błędzie */
-				if( 2 == (sekundy%3) ) {
-					if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[0], &subzero, &cel, &cel_fract_bits) ) display_temp(3,0);
-					else {
-						lcd_gotoxy(3,0);
-						lcd_puts(" error ");
-					}
-
-					if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[1], &subzero, &cel, &cel_fract_bits) ) display_temp(3,1);
-					else {
-						lcd_gotoxy(3,1);
-						lcd_puts(" error ");
-					}
-				}
-
-				/* co sekundę zmiana stanu diody */
-				if( 0 == (sekundy%1) ) {
-					PORTC ^= (1<<LED1_PIN);
-				}
 
 				/* zerujemy flagę aby tylko jeden raz w ciągu sekundy wykonać operacje */
 				s1_flag=0;
@@ -137,6 +146,35 @@ int main(void)
 }
 
 
+/* ================= PROCEDURA OBSŁUGI PRZERWANIA - COMPARE MATCH */
+/* pełni funkcję timera programowego wyznaczającego podstawę czasu = 1s */
+ISR( TIMER0_COMPA_vect )
+{
+	static uint8_t cnt=0;	/* statyczna zmienna cnt do odliczania setnych ms */
+
+	if(++cnt>9) {	/* gdy licznik ms > 99 (minęła 1 sekunda) */
+		ms100_flag=1;	/* ustaw flagę tyknięcia 100 ms */
+		sto_ms++; /* zwiększ licznik 100ms */
+		if(sto_ms>9) {
+			sto_ms=0;
+			s1_flag=1;	/* ustaw flagę tyknięcia sekundy */
+			sekundy++;	/* zwiększ licznik sekund */
+		}
+		if(sekundy>59) sekundy=0; /* jeśli iloś sekund > 59 - wyzeruj */
+		cnt=0;	/* wyzeru licznik setnych ms */
+	}
+}
+
+/* przerwanie wywoływane za pomocą przycisku */
+ISR( PCINT2_vect )
+{
+	if( !( PIND & (1<<PD7) ) ) {
+		screen++;
+		if( screen > 2 ) screen=0;
+	}
+}
+
+/* ---------- definicje funkcji ---------- */
 void display_temp(uint8_t x, uint8_t y)
 {
 	lcd_gotoxy(x,y);
@@ -146,18 +184,4 @@ void display_temp(uint8_t x, uint8_t y)
 	lcd_puts(".");	/* wyświetl kropkę */
 	lcd_puti(cel_fract_bits); /* wyświetl dziesiętne częci stopnia */
 	lcd_puts(" C "); /* wyświetl znak jednostek (C - stopnie Celsiusza) */
-}
-
-/* ================= PROCEDURA OBSŁUGI PRZERWANIA - COMPARE MATCH */
-/* pełni funkcję timera programowego wyznaczającego podstawę czasu = 1s */
-ISR(TIMER0_COMPA_vect)
-{
-	static uint8_t cnt=0;	/* statyczna zmienna cnt do odliczania setnych ms */
-
-	if(++cnt>99) {	/* gdy licznik ms > 99 (minęła 1 sekunda) */
-		s1_flag=1;	/* ustaw flagę tyknięcia sekundy */
-		sekundy++;	/* zwiększ licznik sekund */
-		if(sekundy>59) sekundy=0; /* jeśli iloś sekund > 59 - wyzeruj */
-		cnt=0;	/* wyzeru licznik setnych ms */
-	}
 }

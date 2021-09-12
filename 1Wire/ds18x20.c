@@ -11,7 +11,7 @@
  * ds18x20.c
  *
  *  Created on: 2009-08-22
- *      modyfikacje: Miros≥aw Kardaú
+ *      modyfikacje: Miros≈Çaw Karda≈õ
  */
 #include <avr/io.h>
 #include <util/delay.h>
@@ -171,7 +171,7 @@ uint8_t DS18X20_start_meas( uint8_t with_power_extern, uint8_t id[])
 /* reads temperature (scratchpad) of sensor with rom-code id
    output: subzero==1 if temp.<0, cel: full celsius, mcel: frac
    in millicelsius*0.1
-   i.e.: subzero=1, cel=18, millicel=5000 = -18,5000∞C */
+   i.e.: subzero=1, cel=18, millicel=5000 = -18,5000ÔøΩC */
 uint8_t DS18X20_read_meas(uint8_t *id, uint8_t *subzero, uint8_t *cel, uint8_t *cel_frac_bits)
 {
 	uint8_t i;
@@ -190,7 +190,7 @@ uint8_t DS18X20_read_meas(uint8_t *id, uint8_t *subzero, uint8_t *cel, uint8_t *
 /* reads temperature (scratchpad) of a single sensor (uses skip-rom)
    output: subzero==1 if temp.<0, cel: full celsius, mcel: frac
    in millicelsius*0.1
-   i.e.: subzero=1, cel=18, millicel=5000 = -18,5000∞C */
+   i.e.: subzero=1, cel=18, millicel=5000 = -18,5000ÔøΩC */
 uint8_t DS18X20_read_meas_single(uint8_t familycode, uint8_t *subzero, uint8_t *cel, uint8_t *cel_frac_bits)
 {
 	uint8_t i;

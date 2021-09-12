@@ -11,7 +11,7 @@
  * ds18x28.h
  *
  *  Created on: 2009-08-22
- *      modyfikacje: Miros�aw Karda�
+ *      modyfikacje: Mirosław Kardaś
  */
 
 #ifndef DS18X28_H_
@@ -22,7 +22,7 @@
 #include "onewire.h"
 
 
-#define MAXSENSORS 2	// <----- Tutaj definiujemy maksymaln� ilo�� czujnik�w
+#define MAXSENSORS 2	// <----- Tutaj definiujemy maksymalną ilość czujników
 
 
 /* return values */
