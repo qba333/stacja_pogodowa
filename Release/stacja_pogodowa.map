@@ -23,6 +23,7 @@ Common symbol       size              file
 sekundy             0x1               ./main.o
 screen              0x1               ./main.o
 pcf8574_pinstatus   0x8               ./pcf8574/pcf8574.o
+k1_flag             0x1               ./main.o
 cel_fract_bits      0x1               ./main.o
 ms100_flag          0x1               ./main.o
 s1_flag             0x1               ./main.o
@@ -153,7 +154,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xfb8
+.text           0x00000000      0xfe6
  *(.vectors)
  .vectors       0x00000000       0x68 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -167,17 +168,17 @@ END GROUP
  *(.trampolines*)
                 0x00000068                __trampolines_end = .
  *(.progmem*)
- .progmem.data.__c.2282
+ .progmem.data.__c.2284
                 0x00000068       0x11 ./main.o
- .progmem.data.__c.2280
+ .progmem.data.__c.2282
                 0x00000079        0xf ./main.o
- .progmem.data.__c.2278
+ .progmem.data.__c.2280
                 0x00000088        0x5 ./main.o
- .progmem.data.__c.2276
+ .progmem.data.__c.2278
                 0x0000008d       0x11 ./main.o
- .progmem.data.__c.2274
+ .progmem.data.__c.2276
                 0x0000009e        0x5 ./main.o
- .progmem.data.__c.2272
+ .progmem.data.__c.2274
                 0x000000a3       0x11 ./main.o
                 0x000000b4                . = ALIGN (0x2)
  *(.jumptables)
@@ -421,86 +422,86 @@ END GROUP
                 0x00000c88       0x64 ./main.o
                 0x00000c88                __vector_14
  .text.__vector_5
-                0x00000cec       0x32 ./main.o
+                0x00000cec       0x40 ./main.o
                 0x00000cec                __vector_5
  .text.display_temp
-                0x00000d1e       0x3e ./main.o
-                0x00000d1e                display_temp
+                0x00000d2c       0x3e ./main.o
+                0x00000d2c                display_temp
  .text.startup.main
-                0x00000d5c      0x1c0 ./main.o
-                0x00000d5c                main
+                0x00000d6a      0x1e0 ./main.o
+                0x00000d6a                main
  .text.libgcc.mul
-                0x00000f1c        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f4a        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
  .text.libgcc.div
-                0x00000f1c       0x18 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
-                0x00000f1c                __udivmodqi4
- .text.libgcc   0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f4a       0x18 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f4a                __udivmodqi4
+ .text.libgcc   0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
  .text.libgcc.prologue
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
  .text.libgcc.builtins
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
  .text.libgcc.fmul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
  .text.libgcc.fixed
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodqi4.o)
  .text.libgcc.mul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.mul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
-                0x00000f34        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000f62        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
  .text.avr-libc
-                0x00000f34       0x16 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
-                0x00000f34                __itoa
-                0x00000f34                itoa
+                0x00000f62       0x16 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x00000f62                __itoa
+                0x00000f62                itoa
  .text.avr-libc
-                0x00000f4a       0x16 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x00000f4a                __itoa_ncheck
+                0x00000f78       0x16 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x00000f78                __itoa_ncheck
  .text.avr-libc
-                0x00000f60       0x34 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x00000f60                __utoa_ncheck
-                0x00000f62                __utoa_common
+                0x00000f8e       0x34 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x00000f8e                __utoa_ncheck
+                0x00000f90                __utoa_common
  .text.avr-libc
-                0x00000f94       0x20 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x00000f94                strrev
-                0x00000fb4                . = ALIGN (0x2)
+                0x00000fc2       0x20 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00000fc2                strrev
+                0x00000fe2                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000fb4        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000fb4                _exit
-                0x00000fb4                exit
+ .fini9         0x00000fe2        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000fe2                _exit
+                0x00000fe2                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -519,11 +520,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000fb4        0x4 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000fe2        0x4 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000fb8                _etext = .
+                0x00000fe6                _etext = .
 
-.data           0x00800100       0x20 load address 0x00000fb8
+.data           0x00800100       0x20 load address 0x00000fe6
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
@@ -555,7 +556,7 @@ END GROUP
                 0x00800120                _edata = .
                 0x00800120                PROVIDE (__data_end, .)
 
-.bss            0x00800120       0x23
+.bss            0x00800120       0x24
                 0x00800120                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800120        0x0 c:/users/kuba/documents/mkclipse/avr toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
@@ -578,32 +579,33 @@ END GROUP
  *(.bss*)
  .bss.dataport  0x00800120        0x1 ./lcdpcf8574/lcdpcf8574.o
                 0x00800120                dataport
- .bss.cnt.2290  0x00800121        0x1 ./main.o
+ .bss.cnt.2292  0x00800121        0x1 ./main.o
  *(COMMON)
  COMMON         0x00800122        0x8 ./pcf8574/pcf8574.o
                 0x00800122                pcf8574_pinstatus
  COMMON         0x0080012a       0x10 ./1Wire/ds18x20.o
                 0x0080012a                gSensorIDs
- COMMON         0x0080013a        0x9 ./main.o
+ COMMON         0x0080013a        0xa ./main.o
                 0x0080013a                sekundy
                 0x0080013b                screen
-                0x0080013c                cel_fract_bits
-                0x0080013d                ms100_flag
-                0x0080013e                s1_flag
-                0x0080013f                subzero
-                0x00800140                cel
-                0x00800141                czujniki_cnt
-                0x00800142                sto_ms
-                0x00800143                PROVIDE (__bss_end, .)
-                0x00000fb8                __data_load_start = LOADADDR (.data)
-                0x00000fd8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080013c                k1_flag
+                0x0080013d                cel_fract_bits
+                0x0080013e                ms100_flag
+                0x0080013f                s1_flag
+                0x00800140                subzero
+                0x00800141                cel
+                0x00800142                czujniki_cnt
+                0x00800143                sto_ms
+                0x00800144                PROVIDE (__bss_end, .)
+                0x00000fe6                __data_load_start = LOADADDR (.data)
+                0x00001006                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800143        0x0
-                0x00800143                PROVIDE (__noinit_start, .)
+.noinit         0x00800144        0x0
+                0x00800144                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800143                PROVIDE (__noinit_end, .)
-                0x00800143                _end = .
-                0x00800143                PROVIDE (__heap_start, .)
+                0x00800144                PROVIDE (__noinit_end, .)
+                0x00800144                _end = .
+                0x00800144                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)

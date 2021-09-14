@@ -33,6 +33,17 @@ endif
 
 -include ../makefile.defs
 
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := stacja_pogodowa
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX :=
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
+
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
 stacja_pogodowa.lss \
@@ -48,35 +59,38 @@ sizedummy \
 
 
 # All Target
-all: stacja_pogodowa.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: stacja_pogodowa.elf secondary-outputs
 
 # Tool invocations
-stacja_pogodowa.elf: $(OBJS) $(USER_OBJS)
+stacja_pogodowa.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
 	avr-gcc -Wl,-Map,stacja_pogodowa.map -mmcu=atmega328p -o "stacja_pogodowa.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-stacja_pogodowa.lss: stacja_pogodowa.elf
+stacja_pogodowa.lss: stacja_pogodowa.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: AVR Create Extended Listing'
 	-avr-objdump -h -S stacja_pogodowa.elf  >"stacja_pogodowa.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stacja_pogodowa.hex: stacja_pogodowa.elf
+stacja_pogodowa.hex: stacja_pogodowa.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Create Flash image (ihex format)'
 	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex stacja_pogodowa.elf  "stacja_pogodowa.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stacja_pogodowa.eep: stacja_pogodowa.elf
+stacja_pogodowa.eep: stacja_pogodowa.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Create eeprom image (ihex format)'
 	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex stacja_pogodowa.elf  "stacja_pogodowa.eep"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: stacja_pogodowa.elf
+sizedummy: stacja_pogodowa.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: Print Size'
 	-avr-size --format=avr --mcu=atmega328p stacja_pogodowa.elf
 	@echo 'Finished building: $@'

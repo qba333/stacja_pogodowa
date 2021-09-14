@@ -26,6 +26,7 @@ void display_temp(uint8_t x, uint8_t y);
 uint8_t czujniki_cnt;		/* ilość czujników temperatury na magistrali 1-Wire */
 volatile uint8_t s1_flag;	/* flaga tyknięcia timera co 1 sekundę */
 volatile uint8_t ms100_flag;	/* flaga tyknięcia timera co 100 ms */
+volatile uint8_t k1_flag;	/* flaga naciśnięcia przycisku */
 volatile uint8_t sekundy;	/* licznik sekund 0-59 */
 volatile uint8_t sto_ms;	/* licznik 100ms 0-9 */
 volatile uint8_t screen;	/* numer wyświetlanego ekranu zmienianego przyciiskiem */
@@ -67,6 +68,7 @@ int main(void)
 	/* czekamy 750ms na dokonanie konwersji przez podłączone czujniki */
 	_delay_ms(750);
 
+	uint8_t i = 0;		/* licznik */
 
 	sei();	/* włączamy globalne przerwania */
 
@@ -75,40 +77,53 @@ int main(void)
     		lcd_gotoxy(0,0);
     		lcd_puti(screen+1);		// wyświetlanie numeru ekranu
 
-    		if(ms100_flag) {
+
+    		if(k1_flag) {
+
+    			if( ms100_flag ) i++;
+    			if( i>=2 ) {
+    				i = 0;
+    				k1_flag = 0;
+    			}
+    		}
 
 
+    		if(ms100_flag) { 	/* sprawdzanie flagi tyknięć timera programowego co 100 milisekund */
+
+    			/* wyświetlanie temperatury wewnątrz - ekran 1 */
 				if( ( 0 == (sto_ms%2) ) && ( screen == 0 ) ) {
 					if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[0], &subzero, &cel, &cel_fract_bits) ) {
 						lcd_gotoxy(1,0);
-						lcd_puts_p(PSTR("  Temperatura   ")); /* wyświetl napis na LCD */
-						lcd_gotoxy(0,1);
+						lcd_puts_p(PSTR("  Temperature   ")); /* wyświetl napis na LCD */
+						lcd_gotoxy(4,1);
 						lcd_puts_p(PSTR(" in:"));
-						display_temp(4,1);
+						display_temp(8,1);
 					}
 					else {
-						lcd_gotoxy(4,1);
+						lcd_gotoxy(8,1);
 						lcd_puts(" error ");
 					}
 				}
 
+    			/* wyświetlanie temperatury na zewnątrz - ekran 2 */
 				if( ( 0 == (sto_ms%2) ) && ( screen == 1 ) ) {
 					if( DS18X20_OK == DS18X20_read_meas(gSensorIDs[1], &subzero, &cel, &cel_fract_bits) ) {
 						lcd_gotoxy(1,0);
-						lcd_puts_p(PSTR("  Temperatura   ")); /* wyświetl napis na LCD */
-						lcd_gotoxy(0,1);
+						lcd_puts_p(PSTR("  Temperature   ")); /* wyświetl napis na LCD */
+						lcd_gotoxy(4,1);
 						lcd_puts_p(PSTR("out:"));
-						display_temp(4,1);
+						display_temp(8,1);
 					}
 					else {
-						lcd_gotoxy(4,1);
+						lcd_gotoxy(8,1);
 						lcd_puts(" error ");
 					}
 				}
 
+    			/* wyświetlanie wilgotności powietrza - ekran 3 */
 				if( ( 0 == (sto_ms%2) ) && ( screen == 2 ) ) {
 					lcd_gotoxy(1,0);
-					lcd_puts_p(PSTR("  Wilgotnosc  ")); /* wyświetl napis na LCD */
+					lcd_puts_p(PSTR("  Humidity    ")); /* wyświetl napis na LCD */
 					lcd_gotoxy(0,1);
 					lcd_puts_p(PSTR("                "));
 
@@ -169,7 +184,11 @@ ISR( TIMER0_COMPA_vect )
 ISR( PCINT2_vect )
 {
 	if( !( PIND & (1<<PD7) ) ) {
-		screen++;
+		if (k1_flag == 0) {
+			screen++;
+			k1_flag = 1;
+		}
+
 		if( screen > 2 ) screen=0;
 	}
 }
