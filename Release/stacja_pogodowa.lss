@@ -1648,138 +1648,138 @@ Disassembly of section .text:
  dcc:	78 94       	sei
  dce:	c0 e0       	ldi	r28, 0x00	; 0
  dd0:	da e0       	ldi	r29, 0x0A	; 10
- dd2:	60 e0       	ldi	r22, 0x00	; 0
- dd4:	80 e0       	ldi	r24, 0x00	; 0
- dd6:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- dda:	80 91 3b 01 	lds	r24, 0x013B
- dde:	90 e0       	ldi	r25, 0x00	; 0
- de0:	01 96       	adiw	r24, 0x01	; 1
- de2:	0e 94 9f 02 	call	0x53e	; 0x53e <lcd_puti>
- de6:	80 91 3c 01 	lds	r24, 0x013C
- dea:	88 23       	and	r24, r24
- dec:	59 f0       	breq	.+22     	; 0xe04 <main+0x9a>
- dee:	80 91 3e 01 	lds	r24, 0x013E
- df2:	88 23       	and	r24, r24
- df4:	39 f0       	breq	.+14     	; 0xe04 <main+0x9a>
- df6:	c1 30       	cpi	r28, 0x01	; 1
- df8:	21 f4       	brne	.+8      	; 0xe02 <main+0x98>
- dfa:	10 92 3c 01 	sts	0x013C, r1
- dfe:	c0 e0       	ldi	r28, 0x00	; 0
- e00:	01 c0       	rjmp	.+2      	; 0xe04 <main+0x9a>
- e02:	c1 e0       	ldi	r28, 0x01	; 1
- e04:	80 91 3e 01 	lds	r24, 0x013E
- e08:	88 23       	and	r24, r24
- e0a:	09 f4       	brne	.+2      	; 0xe0e <main+0xa4>
- e0c:	8d c0       	rjmp	.+282    	; 0xf28 <main+0x1be>
- e0e:	80 91 43 01 	lds	r24, 0x0143
- e12:	80 fd       	sbrc	r24, 0
- e14:	2d c0       	rjmp	.+90     	; 0xe70 <main+0x106>
- e16:	80 91 3b 01 	lds	r24, 0x013B
- e1a:	81 11       	cpse	r24, r1
- e1c:	29 c0       	rjmp	.+82     	; 0xe70 <main+0x106>
- e1e:	2d e3       	ldi	r18, 0x3D	; 61
- e20:	31 e0       	ldi	r19, 0x01	; 1
- e22:	41 e4       	ldi	r20, 0x41	; 65
- e24:	51 e0       	ldi	r21, 0x01	; 1
- e26:	60 e4       	ldi	r22, 0x40	; 64
- e28:	71 e0       	ldi	r23, 0x01	; 1
- e2a:	8a e2       	ldi	r24, 0x2A	; 42
- e2c:	91 e0       	ldi	r25, 0x01	; 1
- e2e:	0e 94 c3 04 	call	0x986	; 0x986 <DS18X20_read_meas>
- e32:	81 11       	cpse	r24, r1
- e34:	15 c0       	rjmp	.+42     	; 0xe60 <main+0xf6>
- e36:	60 e0       	ldi	r22, 0x00	; 0
- e38:	81 e0       	ldi	r24, 0x01	; 1
- e3a:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- e3e:	83 ea       	ldi	r24, 0xA3	; 163
- e40:	90 e0       	ldi	r25, 0x00	; 0
- e42:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
- e46:	61 e0       	ldi	r22, 0x01	; 1
- e48:	84 e0       	ldi	r24, 0x04	; 4
- e4a:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- e4e:	8e e9       	ldi	r24, 0x9E	; 158
- e50:	90 e0       	ldi	r25, 0x00	; 0
- e52:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
- e56:	61 e0       	ldi	r22, 0x01	; 1
- e58:	88 e0       	ldi	r24, 0x08	; 8
- e5a:	0e 94 96 06 	call	0xd2c	; 0xd2c <display_temp>
- e5e:	08 c0       	rjmp	.+16     	; 0xe70 <main+0x106>
- e60:	61 e0       	ldi	r22, 0x01	; 1
- e62:	88 e0       	ldi	r24, 0x08	; 8
- e64:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- e68:	88 e1       	ldi	r24, 0x18	; 24
- e6a:	91 e0       	ldi	r25, 0x01	; 1
- e6c:	0e 94 93 02 	call	0x526	; 0x526 <lcd_puts>
- e70:	80 91 43 01 	lds	r24, 0x0143
- e74:	80 fd       	sbrc	r24, 0
- e76:	2d c0       	rjmp	.+90     	; 0xed2 <main+0x168>
- e78:	80 91 3b 01 	lds	r24, 0x013B
- e7c:	81 30       	cpi	r24, 0x01	; 1
- e7e:	49 f5       	brne	.+82     	; 0xed2 <main+0x168>
- e80:	2d e3       	ldi	r18, 0x3D	; 61
- e82:	31 e0       	ldi	r19, 0x01	; 1
- e84:	41 e4       	ldi	r20, 0x41	; 65
- e86:	51 e0       	ldi	r21, 0x01	; 1
- e88:	60 e4       	ldi	r22, 0x40	; 64
- e8a:	71 e0       	ldi	r23, 0x01	; 1
- e8c:	82 e3       	ldi	r24, 0x32	; 50
- e8e:	91 e0       	ldi	r25, 0x01	; 1
- e90:	0e 94 c3 04 	call	0x986	; 0x986 <DS18X20_read_meas>
- e94:	81 11       	cpse	r24, r1
- e96:	15 c0       	rjmp	.+42     	; 0xec2 <main+0x158>
- e98:	60 e0       	ldi	r22, 0x00	; 0
- e9a:	81 e0       	ldi	r24, 0x01	; 1
- e9c:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- ea0:	8d e8       	ldi	r24, 0x8D	; 141
- ea2:	90 e0       	ldi	r25, 0x00	; 0
- ea4:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
- ea8:	61 e0       	ldi	r22, 0x01	; 1
- eaa:	84 e0       	ldi	r24, 0x04	; 4
- eac:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- eb0:	88 e8       	ldi	r24, 0x88	; 136
- eb2:	90 e0       	ldi	r25, 0x00	; 0
- eb4:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
- eb8:	61 e0       	ldi	r22, 0x01	; 1
- eba:	88 e0       	ldi	r24, 0x08	; 8
- ebc:	0e 94 96 06 	call	0xd2c	; 0xd2c <display_temp>
- ec0:	08 c0       	rjmp	.+16     	; 0xed2 <main+0x168>
- ec2:	61 e0       	ldi	r22, 0x01	; 1
- ec4:	88 e0       	ldi	r24, 0x08	; 8
- ec6:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- eca:	88 e1       	ldi	r24, 0x18	; 24
- ecc:	91 e0       	ldi	r25, 0x01	; 1
- ece:	0e 94 93 02 	call	0x526	; 0x526 <lcd_puts>
- ed2:	80 91 43 01 	lds	r24, 0x0143
- ed6:	80 fd       	sbrc	r24, 0
- ed8:	14 c0       	rjmp	.+40     	; 0xf02 <main+0x198>
- eda:	80 91 3b 01 	lds	r24, 0x013B
- ede:	82 30       	cpi	r24, 0x02	; 2
- ee0:	81 f4       	brne	.+32     	; 0xf02 <main+0x198>
- ee2:	60 e0       	ldi	r22, 0x00	; 0
- ee4:	81 e0       	ldi	r24, 0x01	; 1
- ee6:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- eea:	89 e7       	ldi	r24, 0x79	; 121
- eec:	90 e0       	ldi	r25, 0x00	; 0
- eee:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
- ef2:	61 e0       	ldi	r22, 0x01	; 1
- ef4:	80 e0       	ldi	r24, 0x00	; 0
- ef6:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
- efa:	88 e6       	ldi	r24, 0x68	; 104
- efc:	90 e0       	ldi	r25, 0x00	; 0
- efe:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
- f02:	80 91 43 01 	lds	r24, 0x0143
- f06:	6d 2f       	mov	r22, r29
- f08:	0e 94 a5 07 	call	0xf4a	; 0xf4a <__udivmodqi4>
- f0c:	91 11       	cpse	r25, r1
- f0e:	01 c0       	rjmp	.+2      	; 0xf12 <main+0x1a8>
- f10:	40 9a       	sbi	0x08, 0	; 8
- f12:	80 91 43 01 	lds	r24, 0x0143
- f16:	6d 2f       	mov	r22, r29
- f18:	0e 94 a5 07 	call	0xf4a	; 0xf4a <__udivmodqi4>
- f1c:	91 30       	cpi	r25, 0x01	; 1
- f1e:	11 f4       	brne	.+4      	; 0xf24 <main+0x1ba>
- f20:	88 b1       	in	r24, 0x08	; 8
- f22:	18 b8       	out	0x08, r1	; 8
+ dd2:	80 91 3c 01 	lds	r24, 0x013C
+ dd6:	88 23       	and	r24, r24
+ dd8:	59 f0       	breq	.+22     	; 0xdf0 <main+0x86>
+ dda:	80 91 3e 01 	lds	r24, 0x013E
+ dde:	88 23       	and	r24, r24
+ de0:	39 f0       	breq	.+14     	; 0xdf0 <main+0x86>
+ de2:	c1 30       	cpi	r28, 0x01	; 1
+ de4:	21 f4       	brne	.+8      	; 0xdee <main+0x84>
+ de6:	10 92 3c 01 	sts	0x013C, r1
+ dea:	c0 e0       	ldi	r28, 0x00	; 0
+ dec:	01 c0       	rjmp	.+2      	; 0xdf0 <main+0x86>
+ dee:	c1 e0       	ldi	r28, 0x01	; 1
+ df0:	80 91 3e 01 	lds	r24, 0x013E
+ df4:	88 23       	and	r24, r24
+ df6:	09 f4       	brne	.+2      	; 0xdfa <main+0x90>
+ df8:	97 c0       	rjmp	.+302    	; 0xf28 <main+0x1be>
+ dfa:	80 91 43 01 	lds	r24, 0x0143
+ dfe:	80 fd       	sbrc	r24, 0
+ e00:	2d c0       	rjmp	.+90     	; 0xe5c <main+0xf2>
+ e02:	80 91 3b 01 	lds	r24, 0x013B
+ e06:	81 11       	cpse	r24, r1
+ e08:	29 c0       	rjmp	.+82     	; 0xe5c <main+0xf2>
+ e0a:	2d e3       	ldi	r18, 0x3D	; 61
+ e0c:	31 e0       	ldi	r19, 0x01	; 1
+ e0e:	41 e4       	ldi	r20, 0x41	; 65
+ e10:	51 e0       	ldi	r21, 0x01	; 1
+ e12:	60 e4       	ldi	r22, 0x40	; 64
+ e14:	71 e0       	ldi	r23, 0x01	; 1
+ e16:	8a e2       	ldi	r24, 0x2A	; 42
+ e18:	91 e0       	ldi	r25, 0x01	; 1
+ e1a:	0e 94 c3 04 	call	0x986	; 0x986 <DS18X20_read_meas>
+ e1e:	81 11       	cpse	r24, r1
+ e20:	15 c0       	rjmp	.+42     	; 0xe4c <main+0xe2>
+ e22:	60 e0       	ldi	r22, 0x00	; 0
+ e24:	81 e0       	ldi	r24, 0x01	; 1
+ e26:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ e2a:	83 ea       	ldi	r24, 0xA3	; 163
+ e2c:	90 e0       	ldi	r25, 0x00	; 0
+ e2e:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
+ e32:	61 e0       	ldi	r22, 0x01	; 1
+ e34:	84 e0       	ldi	r24, 0x04	; 4
+ e36:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ e3a:	8e e9       	ldi	r24, 0x9E	; 158
+ e3c:	90 e0       	ldi	r25, 0x00	; 0
+ e3e:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
+ e42:	61 e0       	ldi	r22, 0x01	; 1
+ e44:	88 e0       	ldi	r24, 0x08	; 8
+ e46:	0e 94 96 06 	call	0xd2c	; 0xd2c <display_temp>
+ e4a:	08 c0       	rjmp	.+16     	; 0xe5c <main+0xf2>
+ e4c:	61 e0       	ldi	r22, 0x01	; 1
+ e4e:	88 e0       	ldi	r24, 0x08	; 8
+ e50:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ e54:	88 e1       	ldi	r24, 0x18	; 24
+ e56:	91 e0       	ldi	r25, 0x01	; 1
+ e58:	0e 94 93 02 	call	0x526	; 0x526 <lcd_puts>
+ e5c:	80 91 43 01 	lds	r24, 0x0143
+ e60:	80 fd       	sbrc	r24, 0
+ e62:	2d c0       	rjmp	.+90     	; 0xebe <main+0x154>
+ e64:	80 91 3b 01 	lds	r24, 0x013B
+ e68:	81 30       	cpi	r24, 0x01	; 1
+ e6a:	49 f5       	brne	.+82     	; 0xebe <main+0x154>
+ e6c:	2d e3       	ldi	r18, 0x3D	; 61
+ e6e:	31 e0       	ldi	r19, 0x01	; 1
+ e70:	41 e4       	ldi	r20, 0x41	; 65
+ e72:	51 e0       	ldi	r21, 0x01	; 1
+ e74:	60 e4       	ldi	r22, 0x40	; 64
+ e76:	71 e0       	ldi	r23, 0x01	; 1
+ e78:	82 e3       	ldi	r24, 0x32	; 50
+ e7a:	91 e0       	ldi	r25, 0x01	; 1
+ e7c:	0e 94 c3 04 	call	0x986	; 0x986 <DS18X20_read_meas>
+ e80:	81 11       	cpse	r24, r1
+ e82:	15 c0       	rjmp	.+42     	; 0xeae <main+0x144>
+ e84:	60 e0       	ldi	r22, 0x00	; 0
+ e86:	81 e0       	ldi	r24, 0x01	; 1
+ e88:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ e8c:	8d e8       	ldi	r24, 0x8D	; 141
+ e8e:	90 e0       	ldi	r25, 0x00	; 0
+ e90:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
+ e94:	61 e0       	ldi	r22, 0x01	; 1
+ e96:	84 e0       	ldi	r24, 0x04	; 4
+ e98:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ e9c:	88 e8       	ldi	r24, 0x88	; 136
+ e9e:	90 e0       	ldi	r25, 0x00	; 0
+ ea0:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
+ ea4:	61 e0       	ldi	r22, 0x01	; 1
+ ea6:	88 e0       	ldi	r24, 0x08	; 8
+ ea8:	0e 94 96 06 	call	0xd2c	; 0xd2c <display_temp>
+ eac:	08 c0       	rjmp	.+16     	; 0xebe <main+0x154>
+ eae:	61 e0       	ldi	r22, 0x01	; 1
+ eb0:	88 e0       	ldi	r24, 0x08	; 8
+ eb2:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ eb6:	88 e1       	ldi	r24, 0x18	; 24
+ eb8:	91 e0       	ldi	r25, 0x01	; 1
+ eba:	0e 94 93 02 	call	0x526	; 0x526 <lcd_puts>
+ ebe:	80 91 43 01 	lds	r24, 0x0143
+ ec2:	80 fd       	sbrc	r24, 0
+ ec4:	14 c0       	rjmp	.+40     	; 0xeee <main+0x184>
+ ec6:	80 91 3b 01 	lds	r24, 0x013B
+ eca:	82 30       	cpi	r24, 0x02	; 2
+ ecc:	81 f4       	brne	.+32     	; 0xeee <main+0x184>
+ ece:	60 e0       	ldi	r22, 0x00	; 0
+ ed0:	81 e0       	ldi	r24, 0x01	; 1
+ ed2:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ ed6:	89 e7       	ldi	r24, 0x79	; 121
+ ed8:	90 e0       	ldi	r25, 0x00	; 0
+ eda:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
+ ede:	61 e0       	ldi	r22, 0x01	; 1
+ ee0:	80 e0       	ldi	r24, 0x00	; 0
+ ee2:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ ee6:	88 e6       	ldi	r24, 0x68	; 104
+ ee8:	90 e0       	ldi	r25, 0x00	; 0
+ eea:	0e 94 bb 02 	call	0x576	; 0x576 <lcd_puts_p>
+ eee:	80 91 43 01 	lds	r24, 0x0143
+ ef2:	6d 2f       	mov	r22, r29
+ ef4:	0e 94 a5 07 	call	0xf4a	; 0xf4a <__udivmodqi4>
+ ef8:	91 11       	cpse	r25, r1
+ efa:	01 c0       	rjmp	.+2      	; 0xefe <main+0x194>
+ efc:	40 9a       	sbi	0x08, 0	; 8
+ efe:	80 91 43 01 	lds	r24, 0x0143
+ f02:	6d 2f       	mov	r22, r29
+ f04:	0e 94 a5 07 	call	0xf4a	; 0xf4a <__udivmodqi4>
+ f08:	91 30       	cpi	r25, 0x01	; 1
+ f0a:	11 f4       	brne	.+4      	; 0xf10 <main+0x1a6>
+ f0c:	88 b1       	in	r24, 0x08	; 8
+ f0e:	18 b8       	out	0x08, r1	; 8
+ f10:	60 e0       	ldi	r22, 0x00	; 0
+ f12:	80 e0       	ldi	r24, 0x00	; 0
+ f14:	0e 94 51 02 	call	0x4a2	; 0x4a2 <lcd_gotoxy>
+ f18:	80 91 3b 01 	lds	r24, 0x013B
+ f1c:	90 e0       	ldi	r25, 0x00	; 0
+ f1e:	01 96       	adiw	r24, 0x01	; 1
+ f20:	0e 94 9f 02 	call	0x53e	; 0x53e <lcd_puti>
  f24:	10 92 3e 01 	sts	0x013E, r1
  f28:	80 91 3f 01 	lds	r24, 0x013F
  f2c:	88 23       	and	r24, r24

@@ -50,6 +50,7 @@ int main(void)
 	PCICR |= (1<<PCINT2);	// zezwolenie na przewrania PCINT2 (na porcie D)
 	PCMSK2 |= (1<<PCINT23);	// PCINT23 = PD7
 
+	uint8_t i = 0;		/* licznik */
 
     lcd_init(LCD_DISP_ON);	// inicjalizacja LCD
 	lcd_led(0);				// włączenie podświetlenia LCD
@@ -68,17 +69,14 @@ int main(void)
 	/* czekamy 750ms na dokonanie konwersji przez podłączone czujniki */
 	_delay_ms(750);
 
-	uint8_t i = 0;		/* licznik */
+
 
 	sei();	/* włączamy globalne przerwania */
 
     while(1)
         {
-    		lcd_gotoxy(0,0);
-    		lcd_puti(screen+1);		// wyświetlanie numeru ekranu
 
-
-    		if(k1_flag) {
+    		if(k1_flag) { 	/* sprawdzenie flagi naciśnięcia przycisku - eliminacja drgań styków */
 
     			if( ms100_flag ) i++;
     			if( i>=2 ) {
@@ -138,7 +136,10 @@ int main(void)
 					PORTC &= !(1<<LED1_PIN);
 				}
 
-				/* zerujemy flagę aby tylko jeden raz w ciągu 100ms wykonać operacje */
+				lcd_gotoxy(0,0);
+				lcd_puti(screen+1);		// wyświetlanie numeru ekranu
+
+				/* zerowanie flagi aby tylko jeden raz w ciągu 100ms wykonać operacje */
 				ms100_flag=0;
 
     		}
@@ -150,7 +151,6 @@ int main(void)
 				if( 0 == (sekundy%2) ) {
 					DS18X20_start_meas( DS18X20_POWER_EXTERN, NULL );
 				}
-
 
 				/* zerujemy flagę aby tylko jeden raz w ciągu sekundy wykonać operacje */
 				s1_flag=0;
